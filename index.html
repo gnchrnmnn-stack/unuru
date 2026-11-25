@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Намайг уучлах уу?</title>
+<style>
+  body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+       background:#ffe4ec;font-family:sans-serif;overflow:hidden}
+  h1{font-size:2rem;color:#c2185b;text-align:center}
+  button{font-size:1.2rem;padding:12px 28px;border:none;border-radius:12px;cursor:pointer}
+  #yes{background:#e91e63;color:#fff;transition:transform .2s}
+  #no{background:#9e9e9e;color:#fff;position:fixed}
+  #result{display:none;text-align:center}
+  .big{font-size:120px}
+  #cat-image{width:min(80vw, 420px);height:min(65vh, 520px);object-fit:cover;
+             border-radius:24px;box-shadow:0 12px 30px rgba(194,24,91,.25)}
+</style>
+</head>
+<body>
+<div id="q" style="text-align:center">
+  <h1>Намайг уучлах уу?</h1>
+  <button id="yes">Тийм</button>
+  <button id="no">Үгүй</button>
+</div>
+
+<div id="result">
+  <img id="cat-image" src="assets/cat.png" alt="Хайртай муур">
+  <h1>Баярлалаа! хайртай шүү</h1>
+</div>
+
+<script>
+  const yes = document.getElementById('yes');
+  const no  = document.getElementById('no');
+  let scale = 1;
+
+  // "Үгүй" товч зугтана
+  function runAway() {
+    const x = Math.random() * (innerWidth  - no.offsetWidth  - 20);
+    const y = Math.random() * (innerHeight - no.offsetHeight - 20);
+    no.style.left = x + 'px';
+    no.style.top  = y + 'px';
+
+    // "Тийм" товч бүр том болно
+    scale += 0.3;
+    yes.style.transform = `scale(${scale})`;
+  }
+
+  no.addEventListener('mouseenter', runAway);
+  no.addEventListener('touchstart', e => { e.preventDefault(); runAway(); });
+  no.addEventListener('click', runAway);
+
+  yes.addEventListener('click', () => {
+    document.getElementById('q').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+  });
+</script>
+</body>
+</html>
